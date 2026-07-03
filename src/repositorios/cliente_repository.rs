@@ -56,10 +56,7 @@ pub async fn atualizar_cliente(
     Ok(())
 }
 
-pub async fn criar_cliente(
-    pool: &MySqlPool,
-    cliente: &ClienteDto,
-) -> Result<(), sqlx::Error> {
+pub async fn criar_cliente(pool: &MySqlPool, cliente: &ClienteDto) -> Result<(), sqlx::Error> {
     sqlx::query(
         "
         INSERT INTO clientes (nome, cpf)
@@ -74,16 +71,12 @@ pub async fn criar_cliente(
     Ok(())
 }
 
-pub async fn excluir_cliente(
-    pool: &MySqlPool,
-    id: u32,
-) -> Result<(), sqlx::Error> {
-
+pub async fn excluir_cliente(pool: &MySqlPool, id: u32) -> Result<(), sqlx::Error> {
     sqlx::query(
         "
         DELETE FROM clientes
         WHERE id = ?
-        "
+        ",
     )
     .bind(id)
     .execute(pool)

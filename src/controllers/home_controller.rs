@@ -1,5 +1,5 @@
-use rocket_dyn_templates::{Template, context};
 use crate::utils::date_utils::get_current_year;
+use rocket_dyn_templates::{Template, context};
 
 #[get("/")]
 pub fn index() -> Template {

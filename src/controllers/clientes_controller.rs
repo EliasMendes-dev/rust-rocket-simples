@@ -1,6 +1,6 @@
 use crate::dtos::cliente_dto::ClienteDto;
 use crate::servicos::cliente_servico::{
-    atualizar_cliente, criar_cliente, get_cliente_por_id, get_clientes, excluir_cliente
+    atualizar_cliente, criar_cliente, excluir_cliente, get_cliente_por_id, get_clientes,
 };
 use crate::utils::date_utils::get_current_year;
 use rocket::State;
@@ -87,11 +87,7 @@ pub async fn atualizar(
 }
 
 #[post("/clientes/<id>/excluir")]
-pub async fn excluir(
-    id: u32,
-    pool: &State<MySqlPool>,
-) -> Result<Redirect, Flash<Redirect>> {
-
+pub async fn excluir(id: u32, pool: &State<MySqlPool>) -> Result<Redirect, Flash<Redirect>> {
     match excluir_cliente(pool.inner(), id).await {
         Ok(_) => Ok(Redirect::to("/clientes")),
         Err(_) => Err(Flash::error(

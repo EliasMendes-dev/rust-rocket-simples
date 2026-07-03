@@ -1,4 +1,0 @@
- - eu fiz a variavel active informar qual pagina está ativa pela mudança de cor
- - eu fiz o ano ser automatico com chrono, consegui deixar o footer em baixo na pagina usando o bootstrap
- - eu fiz um banco de dados real ao invés de fazer uma simulação como estava no projeto original
- - é do curso e não alguma adicao minha, mas achei interessante, pegar static do js e css

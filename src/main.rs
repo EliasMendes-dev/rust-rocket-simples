@@ -4,9 +4,9 @@ use rocket_dyn_templates::Template;
 
 mod controllers;
 mod database;
-mod repositorios;
 mod dtos;
 mod models;
+mod repositorios;
 mod servicos;
 mod utils;
 
