@@ -1,20 +1,19 @@
+use crate::dtos::cliente_dto::ClienteDto;
 use crate::servicos::cliente_servico::{
-    get_clientes,
-    get_cliente_por_id,
-    criar_cliente,
-    atualizar_cliente,
+    atualizar_cliente, criar_cliente, get_cliente_por_id, get_clientes, excluir_cliente
 };
 use crate::utils::date_utils::get_current_year;
-use rocket::request::FlashMessage;
-use rocket::{form::Form, response::{Flash, Redirect}};
-use rocket_dyn_templates::{Template, context};
-use crate::dtos::cliente_dto::ClienteDto;
 use rocket::State;
+use rocket::request::FlashMessage;
+use rocket::{
+    form::Form,
+    response::{Flash, Redirect},
+};
+use rocket_dyn_templates::{Template, context};
 use sqlx::MySqlPool;
 
 #[get("/clientes")]
 pub async fn index(pool: &State<MySqlPool>) -> Template {
-    
     let clientes = get_clientes(pool.inner()).await;
 
     Template::render(
@@ -25,7 +24,6 @@ pub async fn index(pool: &State<MySqlPool>) -> Template {
 
 #[get("/clientes/novo")]
 pub fn novo(flash: Option<FlashMessage<'_>>) -> Template {
-
     let mensagem = flash.map(|f| f.message().to_string());
 
     Template::render(
@@ -43,7 +41,6 @@ pub async fn criar(
     cliente_dto_form: Form<ClienteDto>,
     pool: &State<MySqlPool>,
 ) -> Result<Redirect, Flash<Redirect>> {
-
     let cliente_dto = cliente_dto_form.into_inner();
 
     match criar_cliente(pool.inner(), &cliente_dto).await {
@@ -56,12 +53,7 @@ pub async fn criar(
 }
 
 #[get("/clientes/<id>/editar")]
-pub async fn editar(
-    id: u32,
-    pool: &State<MySqlPool>,
-    flash: Option<FlashMessage<'_>>,
-) -> Template {
-
+pub async fn editar(id: u32, pool: &State<MySqlPool>, flash: Option<FlashMessage<'_>>) -> Template {
     let mensagem = flash.map(|f| f.message().to_string());
 
     let cliente = get_cliente_por_id(pool.inner(), id).await;
@@ -83,7 +75,6 @@ pub async fn atualizar(
     pool: &State<MySqlPool>,
     cliente_form: Form<ClienteDto>,
 ) -> Result<Redirect, Flash<Redirect>> {
-
     let cliente = cliente_form.into_inner();
 
     match atualizar_cliente(pool.inner(), id, &cliente).await {
@@ -91,6 +82,21 @@ pub async fn atualizar(
         Err(_) => Err(Flash::error(
             Redirect::to(format!("/clientes/{}/editar", id)),
             "Erro ao atualizar cliente",
+        )),
+    }
+}
+
+#[post("/clientes/<id>/excluir")]
+pub async fn excluir(
+    id: u32,
+    pool: &State<MySqlPool>,
+) -> Result<Redirect, Flash<Redirect>> {
+
+    match excluir_cliente(pool.inner(), id).await {
+        Ok(_) => Ok(Redirect::to("/clientes")),
+        Err(_) => Err(Flash::error(
+            Redirect::to("/clientes"),
+            "Erro ao excluir cliente",
         )),
     }
 }

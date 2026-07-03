@@ -73,3 +73,21 @@ pub async fn criar_cliente(
 
     Ok(())
 }
+
+pub async fn excluir_cliente(
+    pool: &MySqlPool,
+    id: u32,
+) -> Result<(), sqlx::Error> {
+
+    sqlx::query(
+        "
+        DELETE FROM clientes
+        WHERE id = ?
+        "
+    )
+    .bind(id)
+    .execute(pool)
+    .await?;
+
+    Ok(())
+}

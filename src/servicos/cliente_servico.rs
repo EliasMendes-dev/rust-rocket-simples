@@ -30,3 +30,11 @@ pub async fn criar_cliente(
 ) -> Result<(), sqlx::Error> {
     cliente_repository::criar_cliente(pool, cliente).await
 }
+
+pub async fn excluir_cliente(
+    pool: &MySqlPool,
+    id: u32,
+) -> Result<(), sqlx::Error> {
+
+    cliente_repository::excluir_cliente(pool, id).await
+}

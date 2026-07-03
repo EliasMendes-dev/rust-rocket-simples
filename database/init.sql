@@ -15,9 +15,6 @@ CREATE TABLE IF NOT EXISTS clientes (
 );
 
 INSERT INTO clientes (nome, cpf) VALUES
-('José Herminio', '123.456.789-09'),
-('Elias Mendes', '987.654.321-00'),
-('Zubi Seru', '456.789.123-45'),
 ('Cassandra Cain', '321.654.987-78'),
 ('Zatanna Zatara', '789.123.456-90'),
 ('Bruce Wayne', '111.222.333-44'),
