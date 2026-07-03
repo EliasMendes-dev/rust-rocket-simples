@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Meu App{% endblock %}</title>
+    {% include "partials/_head" %}
+    {% block head %}{% endblock %}
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    {% include "partials/_header" %}
+
+    <main class="container mt-4 flex-grow-1">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include "partials/_footer" %}
+
+    <!-- Bootstrap JS -->
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <!-- My JS -->
+    <script src="/static/js/site.js"></script>
+</body>
+</html>

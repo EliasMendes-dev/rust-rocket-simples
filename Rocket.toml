@@ -1,0 +1,28 @@
+[global]
+profile = "debug"
+address = "127.0.0.1"
+port = 8000
+workers = 1
+secret_key = "hF8xJ2mK9pQ5vW3nR7tL4zY6cB1eD0gA"
+
+[global.templates]
+dir = "templates"
+engine = "tera"
+
+[debug]
+address = "127.0.0.1"
+port = 8000
+log_level = "debug"
+ident = "Rocket (Dev)"
+
+[release]
+address = "0.0.0.0"
+port = 80
+workers = 16
+log_level = "critical"
+ident = "MyApp"
+
+[release.templates]
+dir = "templates"
+engine = "tera"
+cache = true
