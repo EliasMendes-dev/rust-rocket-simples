@@ -1,0 +1,49 @@
+{% extends "layouts/application" %}
+
+{% block title %}Editar Cliente{% endblock %}
+
+{% block content %}
+
+<h1>Editar Cliente</h1>
+
+{% if flash %} <div class="alert alert-danger"> {{ flash }} </div> {% endif %}
+
+<a href="/clientes" class="btn btn-secondary mb-3">
+    <i class="bi bi-arrow-left"></i> Voltar
+</a>
+
+{% if cliente %}
+<form method="post" action="/clientes/{{ cliente.id }}/editar">
+
+    <div class="mb-3">
+        <label for="nome" class="form-label">Nome</label>
+        <input
+            id="nome"
+            class="form-control"
+            type="text"
+            name="nome"
+            value="{{ cliente.nome | default(value='') }}"
+            required>
+    </div>
+
+    <div class="mb-3">
+        <label for="cpf" class="form-label">CPF</label>
+        <input
+            id="cpf"
+            class="form-control"
+            type="text"
+            name="cpf"
+            value="{{ cliente.cpf | default(value='') }}"
+            required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Atualizar
+    </button>
+
+</form>
+{% else %}
+<div class="alert alert-warning">Cliente não encontrado.</div>
+{% endif %}
+
+{% endblock %}

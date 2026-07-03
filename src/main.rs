@@ -27,6 +27,8 @@ async fn rocket() -> _ {
                 clientes_controller::index,
                 clientes_controller::novo,
                 clientes_controller::criar,
+                clientes_controller::editar,
+                clientes_controller::atualizar,
             ],
         )
         .mount("/static", FileServer::from(relative!("static")))

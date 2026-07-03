@@ -24,6 +24,7 @@ Lista de Clientes
                                 <th scope="col">ID</th>
                                 <th scope="col">Nome</th>
                                 <th scope="col">CPF</th>
+                                <th scope="col" colspan="2">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -33,6 +34,12 @@ Lista de Clientes
                                     <td>{{ cliente.id }}</td>
                                     <td>{{ cliente.nome }}</td>
                                     <td>{{ cliente.cpf }}</td>
+                                    <td class="action_buttons">
+                                        <a href="/clientes/{{ cliente.id }}/editar" class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i></a>
+                                    </td>
+                                    <td class="action_buttons">
+                                        <a href="/clientes/{{ cliente.id }}/excluir" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
+                                    </td>
                                 </tr>
                                 {% endfor %}
                             {% else %}
